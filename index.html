@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Lady ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html { 
+            margin: 0; padding: 0; font-family: 'Quicksand', sans-serif; 
+            background: linear-gradient(135deg,#ffdde1,#ee9ca7); 
+            height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; 
+        }
+        .card { 
+            background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; position: relative; z-index: 10;
+        }
+        img { 
+            width: 100%; height: 300px; object-fit: cover; border-radius: 15px; 
+            margin: 20px 0; border: 3px solid #ff4d6d; background: #fff0f2;
+        }
+        h1 { color: #ff4d6d; font-size: 26px; margin: 0; }
+        #text { color: #555; font-size: 16px; margin: 10px 0; min-height: 60px; line-height: 1.4; }
+        .buttons { display: flex; justify-content: center; gap: 10px; margin-top: 10px; position: relative; height: 60px; align-items: center; }
+        button { 
+            padding: 12px 28px; border: none; border-radius: 50px; cursor: pointer; 
+            font-size: 16px; background: #ff4d6d; color: white; font-weight: bold; 
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
+        button:hover { transform: scale(1.1); background: #ff3355; }
+        #noBtn { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; position: absolute; z-index: 100; transition: 0.1s ease; }
+        
+        /* Music & Heart Styles */
+        .music-ctrl { position: fixed; top: 20px; right: 20px; background: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-size: 20px; border: none; z-index: 1000; }
+        .heart { position: absolute; color: #ff4d6d; font-size: 20px; animation: float 3s linear forwards; z-index: 1; pointer-events: none; }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="music-ctrl" onclick="toggleMusic()" id="musicBtn">🎵</button>
+    <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <div class="card" id="mainCard">
+        <h1 id="title">A Special Journey For You</h1>
+        <p id="text"></p>
+        <img id="mainImage" src="intro.jpg.jpg"> <div class="buttons" id="buttonsArea">
+            <button onclick="nextPage()">Start Our Tale 💖</button>
+        </div>
+    </div>
+
+    <script>
+        let page = 0;
+        const audio = document.getElementById("bgMusic");
+        
+        function toggleMusic() {
+            if (audio.paused) { audio.play(); document.getElementById("musicBtn").innerText = "⏸️"; }
+            else { audio.pause(); document.getElementById("musicBtn").innerText = "🎵"; }
+        }
+
+        function typeWriter(text, elementId) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = "";
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 35);
+                }
+            }
+            type();
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        typeWriter("I made this to show you how much you mean to me. Ready?", "text");
+
+        function nextPage() {
+            page++;
+            const title = document.getElementById("title");
+            const img = document.getElementById("mainImage");
+            const buttons = document.getElementById("buttonsArea");
+
+            if(page === 1){
+                title.innerText = "Rose Day 🌹";
+                typeWriter("Accept this rose as a token of how special you are to me.", "text");
+                img.src = "roseday.png.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">It's beautiful ❤️</button>`;
+            }
+            else if(page === 2){
+                title.innerText = "Propose Day 💍";
+                typeWriter("Will you stay by my side, today and always?", "text");
+                img.src = "proposeday.jpg.jpg"; 
+                buttons.innerHTML = `<button onclick="nextPage()">Always and forever ❤️</button>`;
+            }
+            else if(page === 3){
+                title.innerText = "Chocolate Day 🍫";
+                typeWriter("I know, I know... you don't like chocolates. Don't worry, I'll bake a cake for you instead!", "text");
+                img.src = "chocolateday.png.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">I'll hold you to that! 😋</button>`;
+            }
+            else if(page === 4){
+                title.innerText = "Teddy Day 🧸";
+                typeWriter("A teddy for when I’m not around to hug you.", "text");
+                img.src = "teddyday.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">So cute! 🧸</button>`;
+            }
+            else if(page === 5){
+                title.innerText = "Promise Day 🤝";
+                typeWriter("I promise to always be there for you, no matter what.", "text");
+                img.src = "promiseday.png.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">I pinky promise ❤️</button>`;
+            }
+            else if(page === 6){
+                title.innerText = "Hug Day 🤗";
+                typeWriter("Come, rest within my embrace, where the world grows quiet and only our heartbeats speak.", "text");
+                img.src = "hugday.png.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">Don't let go 🤗</button>`;
+            }
+            else if(page === 7){
+                title.innerText = "Kiss Day 😘";
+                typeWriter("Grant me but a gentle kiss, as soft as moonlight upon still waters beneath a silver sky.", "text");
+                img.src = "kissday.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">Stop, I'm blushing! 😊</button>`;
+            }
+            else if(page === 8){
+                title.innerText = "Valentine’s Day ❤️";
+                typeWriter("You are the most beautiful part of my life.", "text");
+                img.src = "valentineday1.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">Tell me more ❤️</button>`;
+            }
+            else if(page === 9){
+                title.innerText = "My Everything 💖";
+                typeWriter("Every moment with you is a gift.", "text");
+                img.src = "valentineday2.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">Keep going... ✨</button>`;
+            }
+            else if(page === 10){
+                title.innerText = "Our Future 🌈";
+                typeWriter("I can't wait for all the memories we'll make together.", "text");
+                img.src = "valentineday3.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">Wait, one more thing... 💍</button>`;
+            }
+            else if(page === 11){
+                title.innerText = "The Question ❤️";
+                typeWriter("Will you be my Valentine?", "text");
+                img.src = "valentineday4.png.jpg"; //
+                buttons.innerHTML = `
+                    <button onclick="nextPage()" style="padding: 12px 40px;">YES! ❤️</button>
+                    <button id="noBtn" onmouseover="moveNo()">No</button>
+                `;
+            }
+            else if(page === 12){
+                setInterval(createHeart, 300); // Start heart rain
+                title.innerText = "Yay! ❤️ Forever Us";
+                typeWriter("I knew you'd say yes! I love you more than words can say!", "text");
+                img.src = "final1.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="nextPage()">One last surprise... ✨</button>`;
+            }
+            else if(page === 13){
+                title.innerText = "I Love You! ❤️";
+                typeWriter("Thank you for being mine. Every day is special with you.", "text");
+                img.src = "final2.jpg.jpg"; //
+                buttons.innerHTML = `<button onclick="location.reload()">Re-live our story 🔁</button>`;
+            }
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const card = document.getElementById('mainCard');
+            const maxX = card.clientWidth - btn.clientWidth - 40;
+            const maxY = card.clientHeight - btn.clientHeight - 40;
+            btn.style.left = Math.floor(Math.random() * maxX) + "px";
+            btn.style.top = Math.floor(Math.random() * maxY) + "px";
+        }
+    </script>
+</body>
+</html>
